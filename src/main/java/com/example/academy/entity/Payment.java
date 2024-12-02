@@ -21,4 +21,11 @@ public class Payment {
     private LocalDateTime date;
     @ManyToOne
     private Student student;
+
+    public Payment(int amount, PayType payType, LocalDateTime date, Student student) {
+        this.amount = amount;
+        this.payType = payType;
+        this.date = date;
+        this.student = student;
+    }
 }

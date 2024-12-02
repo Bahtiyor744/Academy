@@ -18,4 +18,8 @@ public class Module {
     @ManyToOne
     private Course course;
 
+    public Module(String name, Course course) {
+        this.name = name;
+        this.course = course;
+    }
 }
