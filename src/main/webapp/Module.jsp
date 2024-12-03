@@ -1,6 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.academy.entity.Module" %>
-<%@ page import="com.example.academy.repos.ModuleRepo" %><%--
+<%@ page import="com.example.academy.repos.ModuleRepo" %>
+<%@ page import="com.example.academy.repos.CourseRepo" %>
+<%@ page import="jdk.jfr.Category" %>
+<%@ page import="com.example.academy.entity.Course" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 30.11.2024
@@ -20,6 +23,13 @@
     <h2 class="mb-4">
         Module
     </h2>
+    <div class="col-6 text-end">
+        <button type="button" class="btn btn-primary"
+                style="position: absolute; top: 50px; right: 110px; margin: 10px;"
+                data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+            ADD
+        </button>
+    </div>
     <table class="table table-bordered tablet-hover">
         <thead class="table-dark">
         <tr>
@@ -82,6 +92,44 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Add New Module</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="${pageContext.request.contextPath}/AddModuleServlet" method="post">
+                    <div class="mb-3">
+                        <label for="Module Name" class="form-label">Modul Name</label>
+                        <input type="text" class="form-control" id="Module Name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Course</label>
+                        <select class="form-select" id="productCategory" name="course_id" required>
+                            <%
+                                List<Course> courseList = CourseRepo.getCourseList();
+                                for (Course course : courseList) {
+
+                            %>
+                            <option value="<%= course.getId() %>"><%= course.getName() %>
+                            </option>
+                            <%
+                                }
+                            %>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add Module</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

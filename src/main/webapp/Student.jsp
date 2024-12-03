@@ -26,6 +26,11 @@
     <h2 class="mb-4">
         Student
     </h2>
+    <button type="button" class="btn btn-primary"
+            style="position: absolute; top: 50px; right: 110px; margin: 10px;"
+            data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+        ADD
+    </button>
     <table class="table table-bordered tablet-hover">
         <thead class="table-dark">
         <tr>
@@ -102,6 +107,55 @@
             </form>
         </div>
 </div>
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Add New Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="${pageContext.request.contextPath}/AddStudentServlet" method="post">
+                    <div class="mb-3">
+                        <label for="First Name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="First Name" name="firstName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Last Name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="Last Name" name="lastname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Age" class="form-label">Age</label>
+                        <input type="text" class="form-control" id="Age" name="age" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="Phone" name="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Groups</label>
+                        <select class="form-select" id="productCategory" name="group_id" required>
+                            <%
+                                List<Groups> groupsList = GroupsRepo.getGroupsList();
+                                for (Groups groups : groupsList) {
+                            %>
+                            <option value="<%= groups.getId() %>"><%= groups.getName() %>
+                            </option>
+                            <%
+                                }
+                            %>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add Student</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

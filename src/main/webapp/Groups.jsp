@@ -22,6 +22,11 @@
     <h2 class="mb-4">
         Groups
     </h2>
+    <button type="button" class="btn btn-primary"
+            style="position: absolute; top: 50px; right: 110px; margin: 10px;"
+            data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+        ADD
+    </button>
     <table class="table table-bordered tablet-hover">
         <thead class="table-dark">
         <tr>
@@ -81,6 +86,42 @@
                 Back
             </button>
         </form>
+    </div>
+</div>
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Add New Group</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="${pageContext.request.contextPath}/AddGroupServlet" method="post">
+                    <div class="mb-3">
+                        <label for="Group Name" class="form-label">Group Name</label>
+                        <input type="text" class="form-control" id="Group Name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Modules</label>
+                        <select class="form-select" id="productCategory" name="module_id" required>
+                            <%
+                                List<Module> moduleList = ModuleRepo.getModuleList();
+                                for (Module module : moduleList) {
+                            %>
+                            <option value="<%= module.getId() %>"><%= module.getName() %>
+                            </option>
+                            <%
+                                }
+                            %>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add Groups</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
