@@ -1,6 +1,6 @@
 <%@ page import="com.example.academy.entity.Course" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.repos.CourseRepo" %><%--
+<%@ page import="com.example.academy.repos.CourseRepo" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 30.11.2024
@@ -20,6 +20,13 @@
     <h2 class="mb-4">
         Course
     </h2>
+    <div class="col-6 text-end">
+        <button type="button" class="btn btn-primary"
+                style="position: absolute; top: 50px; right: 110px; margin: 10px;"
+                data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+            ADD
+        </button>
+    </div>
     <table class="table table-bordered tablet-hover">
         <thead class="table-dark">
         <tr>
@@ -42,7 +49,7 @@
                 <%= course.getName() %>
             </td>
             <td>
-                <form action="${pageContext.request.contextPath}/viewOrderItem.jsp" method="get"
+                <form action="Module.jsp" method="get"
                       style="display: inline;">
                     <button class="btn" style="outline: none; color: #fff; background: red"
                             name="course_id" value="<%= course.getId() %>">
@@ -57,14 +64,30 @@
         </tbody>
 
     </table>
-<%--    <div class="mt-3 text-center">--%>
-<%--        <form action="${pageContext.request.contextPath}/myOrders.jsp" method="get">--%>
-<%--            <button class="btn btn-lg btn-primary" style="outline: none; background: steelblue; color: #ffffff;">--%>
-<%--                Back--%>
-<%--            </button>--%>
-<%--        </form>--%>
-<%--    </div>--%>
 </div>
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Add New Course</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="${pageContext.request.contextPath}/AddCourseServlet" method="post">
+                    <div class="mb-3">
+                        <label for="Course Name" class="form-label">Course Name</label>
+                        <input type="text" class="form-control" id="Course Name" name="name" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add Course</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
