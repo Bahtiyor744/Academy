@@ -19,5 +19,8 @@ public class Course {
     private Integer id;
     private String name;
 
+    public Course(String name) {
+        this.name = name;
+    }
 }
 
