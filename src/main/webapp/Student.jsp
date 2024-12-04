@@ -61,10 +61,10 @@
 
         <tr>
             <td>
-                <%= student.getId()%>
+                <%= student.getId() %>
             </td>
             <td>
-                <%= student.getFirstName()%>
+                <%= student.getFirstName() %>
             </td>
             <td>
                 <%= student.getLastName() %>
