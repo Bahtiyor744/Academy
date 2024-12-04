@@ -40,7 +40,8 @@
         <tbody>
         <%
             String student_id = request.getParameter("student_id");
-            List<Payment> paymentList = PaymentRepo.getPaymentRepo();
+            PaymentRepo paymentRepo = new PaymentRepo();
+            List<Payment> paymentList = paymentRepo.get(Payment.class);
             String group_id = request.getParameter("group_id") ;
             int sum = 0;
             for (Payment payment : paymentList) {

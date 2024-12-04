@@ -41,12 +41,8 @@
         </thead>
         <tbody>
         <%
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-            Metamodel metamodel = emf.getMetamodel();
-            for (EntityType<?> entity : metamodel.getEntities()) {
-                System.out.println("Entity: " + entity.getName());
-            }
-            List<Course> courseList = CourseRepo.getCourseList();
+            CourseRepo courseRepo = new CourseRepo();
+            List<Course> courseList = courseRepo.get(Course.class);
             for (Course course : courseList) {
         %>
 
@@ -60,9 +56,16 @@
             <td>
                 <form action="Module.jsp" method="get"
                       style="display: inline;">
-                    <button class="btn" style="outline: none; color: #fff; background: red"
+                    <button class="btn btn-outline-primary"
                             name="course_id" value="<%= course.getId() %>">
                         View
+                    </button>
+                </form>
+                <form action="${pageContext.request.contextPath}/DeleteCourseServlet" method="post"
+                      style="display: inline;">
+                    <button class="btn" style="outline: none; color: #fff; background: red"
+                            name="course_id" value="<%= course.getId() %>">
+                        Delete
                     </button>
                 </form>
             </td>

@@ -1,26 +1,20 @@
 package com.example.academy.entity;
 
+import com.example.academy.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Groups {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Groups extends BaseEntity {
     private String name;
     @ManyToOne
     private Module module;
-
-    public Groups(String name, Module module) {
-        this.name = name;
-        this.module = module;
-    }
 }

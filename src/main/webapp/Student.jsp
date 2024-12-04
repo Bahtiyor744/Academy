@@ -44,9 +44,11 @@
         </thead>
         <tbody>
         <%
-            List<Payment> paymentList = PaymentRepo.getPaymentRepo();
+            PaymentRepo paymentRepo = new PaymentRepo();
+            List<Payment> paymentList = paymentRepo.get(Payment.class);
             int group_id = Integer.parseInt(request.getParameter("group_id"));
-            List<Student> students = StudentRepo.getStudentRepo();
+            StudentRepo studentRepo = new StudentRepo();
+            List<Student> students = studentRepo.get(Student.class);
             for (Student student : students) {
                 int sum = 0;
                 if (student.getGroups().getId() == group_id) {
@@ -85,7 +87,15 @@
                       style="display: inline;">
                     <input type="hidden" name="student_id" value="<%= student.getId() %>">
                     <button class="btn btn-outline-primary" name="group_id" value="<%= student.getGroups().getId() %>">
-                       + Add payment
+                        + Add payment
+                    </button>
+                </form>
+                <form action="${pageContext.request.contextPath}/DeleteStudentServlet" method="get"
+                      style="display: inline;">
+                    <input type="hidden" name="group_id" value="<%= group_id %>">
+                    <button class="btn" style="outline: none; color: #fff; background: red"
+                            name="student_id" value="<%= student.getId() %>">
+                        Delete
                     </button>
                 </form>
             </td>
@@ -135,7 +145,8 @@
                         <label for="productCategory" class="form-label">Groups</label>
                         <select class="form-select" id="productCategory" name="group_id" required>
                             <%
-                                List<Groups> groupsList = GroupsRepo.getGroupsList();
+                                GroupsRepo groupsRepo = new GroupsRepo();
+                                List<Groups> groupsList = groupsRepo.get(Groups.class);
                                 for (Groups groups : groupsList) {
                             %>
                             <option value="<%= groups.getId() %>"><%= groups.getName() %>

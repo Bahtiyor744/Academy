@@ -41,7 +41,8 @@
         </thead>
         <tbody>
         <%
-            List<Module> moduleList = ModuleRepo.getModuleList();
+            ModuleRepo moduleRepo = new ModuleRepo();
+            List<Module> moduleList = moduleRepo.get(Module.class);
             String course_idStr = request.getParameter("course_id");
             int courseId;
             if (course_idStr == null) {
@@ -70,11 +71,20 @@
             <td>
                 <form action="Groups.jsp" method="get"
                       style="display: inline;">
-                    <button class="btn" style="outline: none; color: #fff; background: red"
-                            name="module_id" value="<%= module.getId() %>">
+                    <button class="btn btn-outline-primary"
+                            name="course_id" value="<%= module.getId() %>">
                         View
                     </button>
                 </form>
+                <form action="${pageContext.request.contextPath}/DeleteModuleServlet" method="get"
+                      style="display: inline;">
+                    <input type="hidden" name="course_id" value="<%= course_idStr %>">
+                    <button class="btn" style="outline: none; color: #fff; background: red"
+                            name="module_id" value="<%= module.getId() %>">
+                        Delete
+                    </button>
+                </form>
+
             </td>
         </tr>
         <%
@@ -109,7 +119,8 @@
                         <label for="productCategory" class="form-label">Course</label>
                         <select class="form-select" id="productCategory" name="course_id" required>
                             <%
-                                List<Course> courseList = CourseRepo.getCourseList();
+                                CourseRepo courseRepo = new CourseRepo();
+                                List<Course> courseList =  courseRepo.get(Course.class);
                                 for (Course course : courseList) {
 
                             %>

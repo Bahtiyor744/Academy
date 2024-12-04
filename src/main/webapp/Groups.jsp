@@ -38,15 +38,16 @@
         </thead>
         <tbody>
         <%
-            List<Groups> groupsList = GroupsRepo.getGroupsList();
+            GroupsRepo groupsRepo = new GroupsRepo();
+            List<Groups> groupsList = groupsRepo.get(Groups.class);
             String module_idStr = request.getParameter("module_id");
             int moduleId;
-            if (module_idStr == null){
+            if (module_idStr == null) {
                 String group_idStr = request.getParameter("group_id");
                 Groups groups1 = groupsList.stream().filter(groups -> groups.getId() == Integer.parseInt(group_idStr)).findFirst().orElse(null);
                 assert groups1 != null;
                 moduleId = groups1.getModule().getId();
-            }else {
+            } else {
                 moduleId = Integer.parseInt(module_idStr);
             }
             for (Groups groups : groupsList) {
@@ -59,15 +60,24 @@
             </td>
             <td>
                 <%= groups.getName() %>
-            </td><td>
+            </td>
+            <td>
                 <%= groups.getModule().getName() %>
             </td>
             <td>
                 <form action="Student.jsp" method="get"
                       style="display: inline;">
+                    <button class="btn btn-outline-primary"
+                            name="course_id" value="<%= groups.getId() %>">
+                        View
+                    </button>
+                </form>
+                <form action="${pageContext.request.contextPath}/DeleteGroupServlet" method="get"
+                      style="display: inline;">
+                    <input type="hidden" name="module_id" value="<%= module_idStr %>">
                     <button class="btn" style="outline: none; color: #fff; background: red"
                             name="group_id" value="<%= groups.getId() %>">
-                        View
+                        Delete
                     </button>
                 </form>
             </td>
@@ -105,7 +115,8 @@
                         <label for="productCategory" class="form-label">Modules</label>
                         <select class="form-select" id="productCategory" name="module_id" required>
                             <%
-                                List<Module> moduleList = ModuleRepo.getModuleList();
+                                ModuleRepo moduleRepo = new ModuleRepo();
+                                List<Module> moduleList = moduleRepo.get(Module.class);
                                 for (Module module : moduleList) {
                             %>
                             <option value="<%= module.getId() %>"><%= module.getName() %>
