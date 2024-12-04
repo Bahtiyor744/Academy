@@ -1,6 +1,10 @@
 <%@ page import="com.example.academy.entity.Course" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.academy.repos.CourseRepo" %><%--
+<%@ page import="com.example.academy.repos.CourseRepo" %>
+<%@ page import="javax.persistence.EntityManagerFactory" %>
+<%@ page import="javax.persistence.Persistence" %>
+<%@ page import="javax.persistence.metamodel.Metamodel" %>
+<%@ page import="javax.persistence.metamodel.EntityType" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 30.11.2024
@@ -37,6 +41,11 @@
         </thead>
         <tbody>
         <%
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
+            Metamodel metamodel = emf.getMetamodel();
+            for (EntityType<?> entity : metamodel.getEntities()) {
+                System.out.println("Entity: " + entity.getName());
+            }
             List<Course> courseList = CourseRepo.getCourseList();
             for (Course course : courseList) {
         %>

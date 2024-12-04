@@ -1,6 +1,5 @@
 package com.example.academy.repos;
 
-import com.example.academy.entity.Course;
 import com.example.academy.entity.Payment;
 
 import javax.persistence.EntityManager;
@@ -22,5 +21,4 @@ public class PaymentRepo {
             }
         }
     }
-
 }

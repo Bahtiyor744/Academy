@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class MyListener implements ServletContextListener {
 
-    public static  EntityManagerFactory EMF;
+    public static EntityManagerFactory EMF;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         EMF = Persistence.createEntityManagerFactory("default");

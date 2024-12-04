@@ -1,6 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.academy.entity.Module" %>
-<%@ page import="com.example.academy.repos.ModuleRepo" %>
 <%@ page import="com.example.academy.repos.GroupsRepo" %>
 <%@ page import="com.example.academy.entity.Groups" %>
 <%@ page import="com.example.academy.repos.StudentRepo" %>
@@ -83,11 +81,11 @@
             </td>
             <td>
 
-                <form action="Student.jsp" method="get">
+                <form action="Payments.jsp" method="get"
+                      style="display: inline;">
                     <input type="hidden" name="student_id" value="<%= student.getId() %>">
-                    <button type="submit" class="btn btn-outline-primary" data-bs-toggle="modal"
-                            data-bs-target="#addProductModal">
-                        Add payment
+                    <button class="btn btn-outline-primary" name="group_id" value="<%= student.getGroups().getId() %>">
+                       + Add payment
                     </button>
                 </form>
             </td>
@@ -156,45 +154,6 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addProductModalLabel">Add New Payment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="${pageContext.request.contextPath}/AddPaymentServlet" method="get"
-                      enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="Amount" class="form-label">Amount</label>
-                        <input type="text" class="form-control" id="Amount" name="amount" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="PayType" class="form-label">Pay Type</label>
-                        <select class="form-select" id="PayType" name="type" required>
-                            <option value="CASH">CASH</option>
-                            <option value="BANK">BANK</option>
-                            <option value="CARD">CARD</option>
-                        </select>
-                    </div>
-                    <%
-                        String student_id = request.getParameter("student_id");
-                        System.out.println("dc" + student_id);
-                    %>
-                    <input type="hidden" name="student_id" value="<%= student_id %>">
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Add Payment</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

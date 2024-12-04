@@ -6,6 +6,7 @@
     <persistence-unit name="default">
         <class>com.example.academy.entity.Student</class>
         <class>com.example.academy.entity.Course</class>
+        <class>com.example.academy.entity.Payment</class>
         <properties>
 
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
