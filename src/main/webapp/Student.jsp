@@ -61,10 +61,10 @@
 
         <tr>
             <td>
-                <%= student.getId() %>
+                <%= student.getId()%>
             </td>
             <td>
-                <%= student.getFirstName() %>
+                <%= student.getFirstName()%>
             </td>
             <td>
                 <%= student.getLastName() %>
@@ -85,7 +85,8 @@
 
                 <form action="Student.jsp" method="get">
                     <input type="hidden" name="student_id" value="<%= student.getId() %>">
-                    <button type="submit" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <button type="submit" class="btn btn-outline-primary" data-bs-toggle="modal"
+                            data-bs-target="#addProductModal">
                         Add payment
                     </button>
                 </form>
@@ -179,7 +180,7 @@
                     </div>
                     <%
                         String student_id = request.getParameter("student_id");
-                        System.out.println( "dc"+ student_id);
+                        System.out.println("dc" + student_id);
                     %>
                     <input type="hidden" name="student_id" value="<%= student_id %>">
 
