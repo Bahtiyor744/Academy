@@ -18,7 +18,7 @@ public class Payment {
     private Integer id;
     private int amount;
     private PayType payType;
-    private LocalDateTime date;
+    private LocalDateTime date = LocalDateTime.now();
     @ManyToOne
     private Student student;
 
