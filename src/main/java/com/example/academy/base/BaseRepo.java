@@ -73,5 +73,26 @@ public class BaseRepo<T> {
             }
         }
     }
+    public void edit(T entity) {
+        EntityManager entityManager = null;
+        try {
+            entityManager = EMF.createEntityManager();
+
+            entityManager.getTransaction().begin();
+            entityManager.merge(entity);
+            entityManager.getTransaction().commit();
+            System.out.println("Entity updated successfully.");
+        } catch (Exception e) {
+            if (entityManager != null && entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            throw new RuntimeException("Failed to update entity", e);
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+    }
+
 
 }

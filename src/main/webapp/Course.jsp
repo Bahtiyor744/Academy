@@ -1,10 +1,7 @@
 <%@ page import="com.example.academy.entity.Course" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.academy.repos.CourseRepo" %>
-<%@ page import="javax.persistence.EntityManagerFactory" %>
-<%@ page import="javax.persistence.Persistence" %>
-<%@ page import="javax.persistence.metamodel.Metamodel" %>
-<%@ page import="javax.persistence.metamodel.EntityType" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 30.11.2024
@@ -59,6 +56,13 @@
                     <button class="btn btn-outline-primary"
                             name="course_id" value="<%= course.getId() %>">
                         View
+                    </button>
+                </form>
+                <form action="CourseEdit.jsp" method="get"
+                      style="display: inline;">
+                    <button class="btn btn-outline-warning"
+                            name="course_id" value="<%= course.getId() %>">
+                        Edit
                     </button>
                 </form>
                 <form action="${pageContext.request.contextPath}/DeleteCourseServlet" method="post"

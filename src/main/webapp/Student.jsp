@@ -90,7 +90,15 @@
                         + Add payment
                     </button>
                 </form>
-                <form action="${pageContext.request.contextPath}/DeleteStudentServlet" method="get"
+                <form action="StudentEdit.jsp" method="get"
+                      style="display: inline;">
+                    <input type="hidden" name="group_id" value="<%= group_id %>">
+                    <button class="btn btn-outline-warning"
+                            name="student_id" value="<%= student.getId() %>">
+                        Edit
+                    </button>
+                </form>
+                <form action="${pageContext.request.contextPath}/DeleteStudentServlet" method="post"
                       style="display: inline;">
                     <input type="hidden" name="group_id" value="<%= group_id %>">
                     <button class="btn" style="outline: none; color: #fff; background: red"

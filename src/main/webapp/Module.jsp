@@ -72,8 +72,16 @@
                 <form action="Groups.jsp" method="get"
                       style="display: inline;">
                     <button class="btn btn-outline-primary"
-                            name="course_id" value="<%= module.getId() %>">
+                            name="module_id" value="<%= module.getId() %>">
                         View
+                    </button>
+                </form>
+                <form action="ModuleEdit.jsp" method="get"
+                      style="display: inline;">
+                    <input type="hidden" name="course_id" value="<%= course_idStr %>">
+                    <button class="btn btn-outline-warning"
+                            name="module_id" value="<%= module.getId() %>">
+                        Edit
                     </button>
                 </form>
                 <form action="${pageContext.request.contextPath}/DeleteModuleServlet" method="get"

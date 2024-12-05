@@ -68,8 +68,16 @@
                 <form action="Student.jsp" method="get"
                       style="display: inline;">
                     <button class="btn btn-outline-primary"
-                            name="course_id" value="<%= groups.getId() %>">
+                            name="group_id" value="<%= groups.getId() %>">
                         View
+                    </button>
+                </form>
+                <form action="GroupsEdit.jsp" method="get"
+                      style="display: inline;">
+                    <input type="hidden" name="module_id" value="<%= moduleId %>">
+                    <button class="btn btn-outline-warning"
+                            name="group_id" value="<%= groups.getId() %>">
+                        Edit
                     </button>
                 </form>
                 <form action="${pageContext.request.contextPath}/DeleteGroupServlet" method="get"

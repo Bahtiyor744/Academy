@@ -66,8 +66,12 @@
                 <%= payment.getStudent().getFirstName() + " " + payment.getStudent().getLastName() %>
             </td>
             <td>
-                <form action="" method="get">
-                    <button type="submit" class="btn btn-outline-delete">
+                <form action="${pageContext.request.contextPath}/DeletePaymentServlet" method="post"
+                      style="display: inline;">
+                    <input type="hidden" name="student_id" value="<%= student_id %>">
+                    <input type="hidden" name="group_id" value="<%= group_id %>">
+                    <button class="btn" style="outline: none; color: #fff; background: red"
+                            name="payment_id" value="<%= payment.getId() %>">
                         Delete
                     </button>
                 </form>
